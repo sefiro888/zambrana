@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Detalle del cambio de cinta y recogedor de una persiana">
+  <defs>
+    <linearGradient id="cbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F8F9FB"/><stop offset="1" stop-color="#ECEEF2"/>
+    </linearGradient>
+    <linearGradient id="clama" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFD24A"/><stop offset="1" stop-color="#E6A100"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#cbg)"/>
+  <circle cx="680" cy="420" r="190" fill="#FFC400" opacity="0.08"/>
+
+  <!-- Persiana parcial a la izquierda -->
+  <rect x="60" y="40" width="300" height="420" rx="8" fill="#16181D"/>
+  <rect x="78" y="58" width="264" height="384" rx="4" fill="#23262F"/>
+  <g>
+    <rect x="92" y="72" width="236" height="18" rx="4" fill="url(#clama)"/>
+    <rect x="92" y="98" width="236" height="18" rx="4" fill="url(#clama)"/>
+    <rect x="92" y="124" width="236" height="18" rx="4" fill="url(#clama)" opacity="0.95"/>
+    <rect x="92" y="150" width="236" height="18" rx="4" fill="url(#clama)" opacity="0.88"/>
+    <rect x="92" y="176" width="236" height="18" rx="4" fill="url(#clama)" opacity="0.8"/>
+  </g>
+
+  <!-- CINTA que baja desde la persiana -->
+  <path d="M120 196 C 122 280, 118 340, 130 420" stroke="#FFC400" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <path d="M120 196 C 122 280, 118 340, 130 420" stroke="#E6A100" stroke-width="3" fill="none" stroke-dasharray="2 14" stroke-linecap="round"/>
+
+  <!-- RECOGEDOR a la derecha (caja con rueda y cinta enrollada) -->
+  <g transform="translate(430,150)">
+    <!-- Caja recogedor -->
+    <rect x="0" y="0" width="200" height="220" rx="18" fill="#2B2F38"/>
+    <rect x="18" y="18" width="164" height="184" rx="12" fill="#1F222A"/>
+    <!-- Rueda con cinta enrollada -->
+    <circle cx="100" cy="110" r="74" fill="#3A3F4A"/>
+    <circle cx="100" cy="110" r="74" fill="none" stroke="#16181D" stroke-width="4"/>
+    <circle cx="100" cy="110" r="52" fill="#FFC400"/>
+    <circle cx="100" cy="110" r="52" fill="none" stroke="#E6A100" stroke-width="6" stroke-dasharray="6 10"/>
+    <circle cx="100" cy="110" r="14" fill="#16181D"/>
+    <!-- Salida de la cinta nueva -->
+    <rect x="92" y="180" width="16" height="58" rx="6" fill="#FFC400"/>
+  </g>
+
+  <!-- Etiqueta "cinta nueva" -->
+  <g transform="translate(470,400)">
+    <rect x="0" y="0" width="150" height="44" rx="22" fill="#16181D"/>
+    <circle cx="26" cy="22" r="9" fill="#FFC400"/>
+    <text x="44" y="28" font-family="Poppins, Arial, sans-serif" font-size="17" font-weight="700" fill="#fff">Cinta nueva</text>
+  </g>
+</svg>

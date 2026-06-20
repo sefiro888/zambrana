@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Persiana atascada y bloqueada que requiere una reparación urgente">
+  <defs>
+    <linearGradient id="ubg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#23262F"/><stop offset="1" stop-color="#16181D"/>
+    </linearGradient>
+    <linearGradient id="ulama" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFD24A"/><stop offset="1" stop-color="#E6A100"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#ubg)"/>
+  <circle cx="640" cy="120" r="200" fill="#E63946" opacity="0.12"/>
+  <circle cx="160" cy="420" r="170" fill="#FFC400" opacity="0.08"/>
+
+  <!-- Ventana de noche con persiana atascada a medias -->
+  <rect x="230" y="50" width="360" height="400" rx="8" fill="#0E0F12"/>
+  <rect x="250" y="84" width="320" height="332" rx="4" fill="#2B2F38"/>
+  <rect x="230" y="38" width="360" height="34" rx="6" fill="#3A3F4A"/>
+
+  <!-- Lamas bajadas de forma irregular (atascada/torcida) -->
+  <g>
+    <rect x="266" y="94" width="288" height="18" rx="4" fill="url(#ulama)"/>
+    <rect x="266" y="120" width="288" height="18" rx="4" fill="url(#ulama)"/>
+    <!-- lama torcida -->
+    <rect x="270" y="148" width="280" height="18" rx="4" fill="url(#ulama)" transform="rotate(-4 410 157)"/>
+    <rect x="266" y="178" width="180" height="18" rx="4" fill="url(#ulama)" opacity="0.92"/>
+    <!-- hueco / desencajada -->
+    <rect x="300" y="206" width="220" height="18" rx="4" fill="#9AA1AC" transform="rotate(3 410 215)"/>
+  </g>
+
+  <!-- Cartel de bloqueo / aviso -->
+  <g transform="translate(330,250)">
+    <rect x="0" y="0" width="160" height="86" rx="14" fill="#E63946"/>
+    <path d="M80 14 l64 56 -128 0 z" fill="#E63946"/>
+    <path d="M80 18 l56 50 -112 0 z" fill="#FFC400"/>
+    <rect x="75" y="34" width="10" height="22" rx="5" fill="#16181D"/>
+    <circle cx="80" cy="62" r="5" fill="#16181D"/>
+  </g>
+
+  <!-- Reloj 24h (atención rápida) -->
+  <g transform="translate(610,300)">
+    <circle cx="50" cy="50" r="50" fill="#FFC400"/>
+    <circle cx="50" cy="50" r="50" fill="none" stroke="#E6A100" stroke-width="4"/>
+    <path d="M50 22 v30 l20 12" stroke="#16181D" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Texto rápido -->
+  <g transform="translate(70,120)">
+    <text x="0" y="0" font-family="Poppins, Arial, sans-serif" font-size="30" font-weight="800" fill="#fff">¿Persiana</text>
+    <text x="0" y="38" font-family="Poppins, Arial, sans-serif" font-size="30" font-weight="800" fill="#FFC400">bloqueada?</text>
+    <text x="0" y="78" font-family="Arial, sans-serif" font-size="17" fill="#B7BDC6">Avísanos para valorar</text>
+    <text x="0" y="102" font-family="Arial, sans-serif" font-size="17" fill="#B7BDC6">la solución más rápida.</text>
+  </g>
+</svg>

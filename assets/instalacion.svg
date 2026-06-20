@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Montaje e instalación de una persiana nueva en una vivienda">
+  <defs>
+    <linearGradient id="ibg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F8F9FB"/><stop offset="1" stop-color="#ECEEF2"/>
+    </linearGradient>
+    <linearGradient id="ilama" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFD24A"/><stop offset="1" stop-color="#E6A100"/>
+    </linearGradient>
+    <linearGradient id="isky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE082"/><stop offset="1" stop-color="#FFD24A"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#ibg)"/>
+  <circle cx="150" cy="90" r="170" fill="#FFC400" opacity="0.08"/>
+
+  <!-- Pared con ventana nueva -->
+  <rect x="240" y="50" width="360" height="400" rx="8" fill="#16181D"/>
+  <rect x="262" y="100" width="316" height="328" rx="4" fill="url(#isky)"/>
+  <!-- Cajón nuevo -->
+  <rect x="240" y="50" width="360" height="42" rx="8" fill="#2B2F38"/>
+  <!-- Persiana nueva a media bajada -->
+  <g>
+    <rect x="262" y="96" width="316" height="16" rx="4" fill="url(#ilama)"/>
+    <rect x="262" y="118" width="316" height="16" rx="4" fill="url(#ilama)"/>
+    <rect x="262" y="140" width="316" height="16" rx="4" fill="url(#ilama)" opacity="0.95"/>
+    <rect x="262" y="162" width="316" height="16" rx="4" fill="url(#ilama)" opacity="0.88"/>
+  </g>
+  <!-- Guías laterales nuevas -->
+  <rect x="252" y="92" width="12" height="336" rx="4" fill="#3A3F4A"/>
+  <rect x="576" y="92" width="12" height="336" rx="4" fill="#3A3F4A"/>
+
+  <!-- Escalera de instalación -->
+  <g stroke="#B7BDC6" stroke-width="10" stroke-linecap="round">
+    <line x1="120" y1="120" x2="90" y2="430"/>
+    <line x1="180" y1="120" x2="210" y2="430"/>
+    <line x1="112" y1="190" x2="186" y2="190"/>
+    <line x1="104" y1="260" x2="195" y2="260"/>
+    <line x1="98" y1="330" x2="202" y2="330"/>
+    <line x1="92" y1="400" x2="208" y2="400"/>
+  </g>
+
+  <!-- Taladro -->
+  <g transform="translate(610,250) rotate(18)">
+    <rect x="0" y="0" width="90" height="46" rx="14" fill="#FFC400"/>
+    <rect x="78" y="14" width="60" height="18" rx="6" fill="#16181D"/>
+    <rect x="134" y="18" width="40" height="10" rx="3" fill="#9AA1AC"/>
+    <rect x="14" y="46" width="34" height="56" rx="10" fill="#16181D"/>
+    <rect x="10" y="100" width="42" height="16" rx="6" fill="#2B2F38"/>
+  </g>
+
+  <!-- Etiqueta -->
+  <g transform="translate(300,398)">
+    <rect x="0" y="0" width="240" height="44" rx="22" fill="#16181D"/>
+    <path d="M22 22 l7 8 14-16" stroke="#FFC400" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="56" y="28" font-family="Poppins, Arial, sans-serif" font-size="17" font-weight="700" fill="#fff">Persiana instalada</text>
+  </g>
+</svg>

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Sustitución de lamas rotas de una persiana por lamas nuevas">
+  <defs>
+    <linearGradient id="lbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F8F9FB"/><stop offset="1" stop-color="#ECEEF2"/>
+    </linearGradient>
+    <linearGradient id="llama" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFD24A"/><stop offset="1" stop-color="#E6A100"/>
+    </linearGradient>
+    <linearGradient id="lnueva" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFE082"/><stop offset="1" stop-color="#FFC400"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#lbg)"/>
+  <circle cx="120" cy="430" r="180" fill="#FFC400" opacity="0.08"/>
+
+  <!-- Ventana -->
+  <rect x="200" y="50" width="400" height="400" rx="8" fill="#16181D"/>
+  <rect x="220" y="84" width="360" height="350" rx="4" fill="#23262F"/>
+  <rect x="200" y="38" width="400" height="34" rx="6" fill="#2B2F38"/>
+
+  <!-- Lamas: buenas arriba, hueco en medio, una rota abajo -->
+  <g>
+    <rect x="236" y="94" width="328" height="18" rx="4" fill="url(#llama)"/>
+    <rect x="236" y="120" width="328" height="18" rx="4" fill="url(#llama)"/>
+    <rect x="236" y="146" width="328" height="18" rx="4" fill="url(#llama)"/>
+
+    <!-- Hueco donde falta una lama (se ve el interior oscuro) -->
+    <rect x="236" y="172" width="328" height="18" rx="4" fill="#15171B"/>
+
+    <!-- Lama deteriorada (gris, agrietada) -->
+    <rect x="236" y="198" width="150" height="18" rx="4" fill="#9AA1AC"/>
+    <rect x="416" y="198" width="148" height="18" rx="4" fill="#9AA1AC"/>
+    <path d="M388 198 l12 18 M404 198 l-10 18" stroke="#5A616E" stroke-width="3"/>
+
+    <rect x="236" y="224" width="328" height="18" rx="4" fill="url(#llama)" opacity="0.92"/>
+    <rect x="236" y="250" width="328" height="18" rx="4" fill="url(#llama)" opacity="0.85"/>
+    <rect x="236" y="276" width="328" height="18" rx="4" fill="url(#llama)" opacity="0.78"/>
+  </g>
+
+  <!-- Lama nueva que se está insertando (entra por la derecha) -->
+  <g transform="translate(560,165)">
+    <rect x="0" y="0" width="210" height="22" rx="6" fill="url(#lnueva)" stroke="#E6A100" stroke-width="2"/>
+    <rect x="180" y="4" width="26" height="14" rx="4" fill="#fff" opacity="0.5"/>
+  </g>
+  <!-- Flecha de inserción -->
+  <path d="M548 176 l-30 0 M524 168 l-8 8 8 8" stroke="#16181D" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Etiqueta -->
+  <g transform="translate(300,398)">
+    <rect x="0" y="0" width="200" height="44" rx="22" fill="#16181D"/>
+    <circle cx="26" cy="22" r="9" fill="#FFC400"/>
+    <text x="44" y="28" font-family="Poppins, Arial, sans-serif" font-size="17" font-weight="700" fill="#fff">Lamas nuevas</text>
+  </g>
+</svg>
