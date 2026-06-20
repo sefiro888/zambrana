@@ -59,14 +59,36 @@
 <body>
 
   <!-- =========================================================
-       INTRO INMERSIVA — Persiana cerrada (solo home, gate)
+       INTRO INMERSIVA — Persiana metálica a pantalla completa (gate)
+       Se mantiene cerrada hasta pulsar "Abrir persiana"; sube con
+       efecto cinematográfico y luz. Se recuerda con localStorage.
        ========================================================= -->
-  <div id="intro" role="dialog" aria-modal="true" aria-label="Bienvenida a Persianas Zambrana">
-    <div class="intro-persiana">
-      <span class="intro-remaches" aria-hidden="true"></span>
+  <div id="intro" class="intro-cine" role="dialog" aria-modal="true" aria-label="Bienvenida a Persianas Zambrana">
+    <!-- Cajón superior de la persiana -->
+    <div class="intro-cine__caja" aria-hidden="true"></div>
+
+    <!-- Lamas metálicas que suben al abrir -->
+    <div class="intro-cine__lamas" aria-hidden="true">
+      <span class="intro-lama" style="--i:0"></span>
+      <span class="intro-lama" style="--i:1"></span>
+      <span class="intro-lama" style="--i:2"></span>
+      <span class="intro-lama" style="--i:3"></span>
+      <span class="intro-lama" style="--i:4"></span>
+      <span class="intro-lama" style="--i:5"></span>
+      <span class="intro-lama" style="--i:6"></span>
+      <span class="intro-lama" style="--i:7"></span>
+      <span class="intro-lama" style="--i:8"></span>
+      <span class="intro-lama" style="--i:9"></span>
+      <span class="intro-lama" style="--i:10"></span>
+      <span class="intro-lama" style="--i:11"></span>
+      <span class="intro-lama" style="--i:12"></span>
+      <span class="intro-lama" style="--i:13"></span>
+      <span class="intro-lama intro-lama--final" style="--i:14"></span>
     </div>
-    <div class="intro-contenido">
-      <img src="assets/favicon.svg" alt="" class="intro-logo">
+
+    <!-- Marca + botón de apertura -->
+    <div class="intro-cine__marca">
+      <span class="intro-cine__logo"><img src="assets/favicon.svg" alt=""></span>
       <p class="intro-titulo">Bienvenido a <b>Persianas Zambrana</b></p>
       <p class="intro-sub">Reparación, instalación y urgencias de persianas en Málaga</p>
       <button type="button" id="intro-btn" class="btn btn-call btn-grande intro-cta">

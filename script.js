@@ -43,7 +43,7 @@
       intro.classList.add("intro--abriendo");
       try { localStorage.setItem(STORAGE_KEY, "1"); } catch (err) { /* almacenamiento no disponible */ }
 
-      var duracion = reduceMov ? 300 : 1500;
+      var duracion = reduceMov ? 300 : 1900;
       window.setTimeout(function () {
         intro.classList.add("intro--oculto");
         document.body.classList.remove("intro-activo");
