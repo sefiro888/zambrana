@@ -4765,3 +4765,370 @@ h3 { font-size: 1.2rem; }
     transform: translateY(-92px) rotateX(54deg) scaleY(.55);
   }
 }
+
+/* =====================================================================
+   21. EXPERIENCIA INMERSIVA — Intro persiana, tarjetas 3D, fachada Málaga
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   21.1 INTRO — Persiana cerrada (gate, no autoplay hasta el clic)
+--------------------------------------------------------------------- */
+#intro {
+  flex-direction: column;
+  isolation: isolate;
+}
+#intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(60% 55% at 50% 100%, rgba(255, 196, 0, .5), transparent 70%);
+  opacity: 0;
+  transition: opacity 1.1s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+#intro.intro--abriendo::before { opacity: 1; }
+
+.intro-persiana {
+  z-index: 1;
+  animation: none; /* no se mueve hasta que se pulsa "Abrir persiana" */
+}
+#intro.intro--abriendo .intro-persiana {
+  animation: persianaSube 1.5s cubic-bezier(.7, 0, .2, 1) forwards;
+}
+.intro-persiana::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 14px;
+  background: repeating-linear-gradient(45deg, var(--amarillo) 0 14px, var(--antracita) 14px 28px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .5);
+  z-index: 2;
+}
+.intro-remaches {
+  position: absolute;
+  left: 0; right: 0; bottom: 2px;
+  height: 10px;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, .5) 1.5px, transparent 1.6px);
+  background-size: 22px 10px;
+  background-repeat: repeat-x;
+  opacity: .6;
+  z-index: 3;
+}
+
+.intro-contenido { z-index: 2; max-width: 480px; }
+.intro-titulo {
+  font-family: var(--fuente-titulos);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 5.4vw, 2.5rem);
+  color: #fff;
+  line-height: 1.18;
+  margin-bottom: 10px;
+}
+.intro-titulo b { color: var(--amarillo); }
+.intro-sub {
+  color: rgba(255, 255, 255, .72);
+  font-size: 1rem;
+  margin-bottom: 28px;
+}
+.intro-cta { margin-inline: auto; }
+
+#intro.intro--abriendo .intro-contenido {
+  animation: introTextoSale .5s ease forwards;
+}
+@keyframes introTextoSale {
+  to { opacity: 0; transform: translateY(-10px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #intro::before { transition: none; }
+  #intro.intro--abriendo .intro-persiana { animation-duration: .3s; }
+  #intro.intro--abriendo .intro-contenido { animation-duration: .2s; }
+}
+
+/* ---------------------------------------------------------------------
+   21.2 EXPLORA — Tarjetas 3D de servicios
+--------------------------------------------------------------------- */
+.explora-grid {
+  display: grid;
+  gap: clamp(14px, 2vw, 22px);
+  grid-template-columns: repeat(2, 1fr);
+  perspective: 1200px;
+}
+@media (min-width: 640px) {
+  .explora-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1100px) {
+  .explora-grid { grid-template-columns: repeat(5, 1fr); }
+}
+
+.explora-card {
+  --rx: 0deg;
+  --ry: 0deg;
+  --mx: 50%;
+  --my: 50%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 26px 20px;
+  border-radius: var(--radio-lg);
+  background: linear-gradient(160deg, #1B1F26, #101418);
+  color: #fff;
+  overflow: hidden;
+  text-decoration: none;
+  transform: rotateX(var(--rx)) rotateY(var(--ry)) translateZ(0);
+  transition: transform .35s cubic-bezier(.16, 1, .3, 1), box-shadow .35s ease;
+  box-shadow: 0 14px 30px rgba(16, 20, 24, .22);
+  will-change: transform;
+}
+
+.explora-card__brillo {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(220px circle at var(--mx) var(--my), rgba(255, 196, 0, .35), transparent 60%);
+  opacity: 0;
+  transition: opacity .3s ease;
+  pointer-events: none;
+}
+.explora-card:hover .explora-card__brillo,
+.explora-card:focus-visible .explora-card__brillo { opacity: 1; }
+
+.explora-card:hover,
+.explora-card:focus-visible {
+  box-shadow: 0 26px 54px rgba(16, 20, 24, .32);
+}
+
+.explora-card__ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 196, 0, .14);
+  color: var(--amarillo);
+}
+.explora-card__ico svg { width: 22px; height: 22px; }
+
+.explora-card h3 { color: #fff; font-size: 1.02rem; margin: 0; }
+.explora-card p { color: rgba(255, 255, 255, .68); font-size: .86rem; margin: 0; line-height: 1.5; }
+
+.explora-card__cta {
+  margin-top: auto;
+  padding-top: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  font-size: .84rem;
+  color: var(--amarillo);
+}
+.explora-card__cta svg { width: 16px; height: 16px; transition: transform .25s ease; }
+.explora-card:hover .explora-card__cta svg,
+.explora-card:focus-visible .explora-card__cta svg { transform: translateX(4px); }
+
+@media (hover: none) {
+  .explora-card:active { transform: scale(.97); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .explora-card { transition: box-shadow .2s ease; }
+}
+
+/* ---------------------------------------------------------------------
+   21.3 FACHADA INTERACTIVA — Calle de Málaga
+--------------------------------------------------------------------- */
+.fachada-seccion .seccion-intro { margin-bottom: 30px; }
+
+.fachada {
+  position: relative;
+  border-radius: var(--radio-lg);
+  overflow: hidden;
+  background: linear-gradient(180deg, #BFE3EC 0%, #EAF6F4 55%, #F4F7F9 100%);
+  box-shadow: var(--sombra-lg);
+}
+
+.fachada-cielo { position: relative; height: clamp(36px, 7vw, 64px); }
+.fachada-sol {
+  position: absolute;
+  top: 14px; right: 8%;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #FFF6D5, var(--amarillo) 70%);
+  box-shadow: 0 0 30px rgba(255, 196, 0, .55);
+}
+
+.fachada-muro {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(10px, 2vw, 22px);
+  padding: 0 clamp(16px, 4vw, 40px) clamp(20px, 4vw, 36px);
+  background:
+    linear-gradient(180deg, rgba(16, 20, 24, .04), transparent 30%),
+    repeating-linear-gradient(90deg, #E7DFCF 0 46px, #DCD2BC 46px 48px);
+}
+
+.fachada-portal {
+  height: clamp(26px, 5vw, 42px);
+  background: linear-gradient(180deg, #C9BFA6, #A99C7C);
+  border-top: 4px solid var(--amarillo);
+}
+
+.ventana {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.ventana-marco {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background: linear-gradient(180deg, #2B2F38, #181B20);
+  border-radius: 6px;
+  padding: 8px;
+  box-shadow:
+    inset 0 0 0 4px #DCD2BC,
+    0 10px 24px rgba(16, 20, 24, .18);
+  overflow: hidden;
+}
+
+.ventana-persiana {
+  position: absolute;
+  inset: 8px;
+  border-radius: 3px;
+  background: repeating-linear-gradient(to bottom, #2c303a 0 9px, #20232b 9px 10px);
+  transform-origin: top;
+  transition: transform .5s var(--suave);
+}
+
+/* Estado: atascada → Reparación */
+.ventana--atascada .ventana-persiana { transform: translateY(28%) rotate(-2deg); }
+.ventana--atascada:hover .ventana-persiana,
+.ventana--atascada:focus-visible .ventana-persiana { animation: pzAtascada .5s ease; }
+@keyframes pzAtascada {
+  0%, 100% { transform: translateY(28%) rotate(-2deg); }
+  25% { transform: translateY(26%) rotate(-4deg); }
+  50% { transform: translateY(30%) rotate(2deg); }
+  75% { transform: translateY(27%) rotate(-3deg); }
+}
+
+/* Estado: motor averiado → Motores */
+.ventana--motor .ventana-persiana { transform: translateY(12%); }
+.ventana--motor .ventana-marco::after {
+  content: "";
+  position: absolute;
+  right: 10px; top: 10px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--amarillo);
+}
+.ventana--motor:hover .ventana-marco::after,
+.ventana--motor:focus-visible .ventana-marco::after { animation: pzChispa 1s ease infinite; }
+@keyframes pzChispa {
+  0% { box-shadow: 0 0 0 0 rgba(255, 196, 0, .6); opacity: 1; }
+  70% { box-shadow: 0 0 0 14px rgba(255, 196, 0, 0); opacity: .4; }
+  100% { box-shadow: 0 0 0 14px rgba(255, 196, 0, 0); opacity: 1; }
+}
+
+/* Estado: persiana rota de noche → Urgencias */
+.ventana--urgencia .ventana-marco { background: linear-gradient(180deg, #1A2030, #0C0F16); }
+.ventana--urgencia .ventana-persiana {
+  transform: translateY(36%);
+  clip-path: polygon(0 0, 42% 0, 48% 30%, 38% 38%, 60% 55%, 50% 100%, 0 100%, 100% 100%, 100% 0);
+}
+.ventana--urgencia .ventana-marco::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(230, 57, 70, .35), transparent 60%);
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+.ventana--urgencia:hover .ventana-marco::before,
+.ventana--urgencia:focus-visible .ventana-marco::before { opacity: 1; }
+
+/* Estado: persiana nueva → Instalación */
+.ventana--nueva .ventana-persiana {
+  transform: translateY(0);
+  background: repeating-linear-gradient(to bottom, #FFE27A 0 9px, #FFC400 9px 10px);
+}
+.ventana--nueva .ventana-marco::after {
+  content: "";
+  position: absolute;
+  inset: -40% -120%;
+  background: linear-gradient(75deg, transparent 40%, rgba(255, 255, 255, .55) 50%, transparent 60%);
+  transform: translateX(-60%);
+}
+.ventana--nueva:hover .ventana-marco::after,
+.ventana--nueva:focus-visible .ventana-marco::after { animation: pzBrillo 1.1s ease; }
+@keyframes pzBrillo { to { transform: translateX(60%); } }
+
+.ventana-tag {
+  margin-top: 10px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.ventana-tag strong { display: block; font-family: var(--fuente-titulos); font-size: .82rem; color: var(--antracita); }
+.ventana-tag small { color: var(--amarillo-osc); font-weight: 600; font-size: .78rem; }
+
+.ventana:hover .ventana-tag,
+.ventana:focus-visible .ventana-tag { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 720px) {
+  .fachada-muro { grid-template-columns: repeat(2, 1fr); }
+  .ventana-tag { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ventana--atascada:hover .ventana-persiana,
+  .ventana--atascada:focus-visible .ventana-persiana,
+  .ventana--motor:hover .ventana-marco::after,
+  .ventana--motor:focus-visible .ventana-marco::after,
+  .ventana--nueva:hover .ventana-marco::after,
+  .ventana--nueva:focus-visible .ventana-marco::after { animation: none; }
+}
+
+/* ---------------------------------------------------------------------
+   21.4 TRANSICIÓN ENTRE PÁGINAS — Mini persiana bajando/subiendo
+--------------------------------------------------------------------- */
+html.pz-nav-saliendo body::before,
+html.pz-nav-entrando body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  pointer-events: none;
+  background: repeating-linear-gradient(to bottom, #20232b 0 18px, #2c303a 18px 20px);
+  box-shadow: inset 0 -30px 60px rgba(0, 0, 0, .5);
+}
+html.pz-nav-saliendo body::before {
+  animation: pzVeilBajar .38s cubic-bezier(.4, 0, .2, 1) forwards;
+}
+html.pz-nav-entrando body::before {
+  animation: pzVeilSubir .55s cubic-bezier(.16, 1, .3, 1) .05s both;
+}
+@keyframes pzVeilBajar { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+@keyframes pzVeilSubir { from { transform: translateY(0); } to { transform: translateY(-100%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  html.pz-nav-saliendo body::before,
+  html.pz-nav-entrando body::before { display: none; }
+}
+
+/* ---------------------------------------------------------------------
+   21.5 BRILLO DISCRETO EN BOTONES PRINCIPALES
+--------------------------------------------------------------------- */
+@keyframes pzGlowPulse {
+  0%, 100% { box-shadow: 0 2px 6px rgba(245, 182, 0, .25), 0 10px 24px rgba(245, 182, 0, .34); }
+  50% { box-shadow: 0 2px 10px rgba(245, 182, 0, .4), 0 14px 32px rgba(245, 182, 0, .5); }
+}
+.btn-call.btn-grande { animation: pzGlowPulse 2.8s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .btn-call.btn-grande { animation: none; }
+}

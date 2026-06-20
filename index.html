@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <script>(function(){if(sessionStorage.getItem("pz_nav")==="1"){sessionStorage.removeItem("pz_nav");document.documentElement.classList.add("pz-nav-entrando");}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -58,15 +59,20 @@
 <body>
 
   <!-- =========================================================
-       INTRO ANIMADA — Persiana subiendo (solo home)
+       INTRO INMERSIVA — Persiana cerrada (solo home, gate)
        ========================================================= -->
-  <div id="intro" aria-hidden="true">
-    <div class="intro-persiana"></div>
+  <div id="intro" role="dialog" aria-modal="true" aria-label="Bienvenida a Persianas Zambrana">
+    <div class="intro-persiana">
+      <span class="intro-remaches" aria-hidden="true"></span>
+    </div>
     <div class="intro-contenido">
       <img src="assets/favicon.svg" alt="" class="intro-logo">
-      <p class="frase">Subimos la persiana <b>por ti</b></p>
-      <p class="sub">Persianas Zambrana · Málaga</p>
-      <div class="intro-barra"></div>
+      <p class="intro-titulo">Bienvenido a <b>Persianas Zambrana</b></p>
+      <p class="intro-sub">Reparación, instalación y urgencias de persianas en Málaga</p>
+      <button type="button" id="intro-btn" class="btn btn-call btn-grande intro-cta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+        Abrir persiana
+      </button>
     </div>
   </div>
 
@@ -186,6 +192,97 @@
             <span class="dot"></span>
             <span>Atención en Málaga capital y alrededores</span>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         EXPLORA — Mini recorrido interactivo por servicios
+         ========================================================= -->
+    <section class="section explora" id="explora">
+      <div class="contenedor">
+        <div class="text-center reveal">
+          <span class="eyebrow">Recorrido rápido</span>
+          <h2 class="seccion-titulo">Explora nuestros servicios</h2>
+          <p class="seccion-intro">Pasa el ratón o toca cada tarjeta para entrar directamente en el servicio que necesitas.</p>
+        </div>
+
+        <div class="explora-grid">
+          <a class="explora-card reveal" href="reparacion-persianas-malaga.html">
+            <span class="explora-card__brillo" aria-hidden="true"></span>
+            <span class="explora-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.6 5.6l-6.4 6.4 2.6 2.6 6.4-6.4a4 4 0 0 0 5.6-5.6l-2.4 2.4-2.6-2.6z"/></svg></span>
+            <h3>Reparación</h3>
+            <p>Persianas atascadas o que no responden bien.</p>
+            <span class="explora-card__cta">Entrar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+
+          <a class="explora-card reveal d1" href="motores-persianas-malaga.html">
+            <span class="explora-card__brillo" aria-hidden="true"></span>
+            <span class="explora-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="5"/></svg></span>
+            <h3>Motores y automatismos</h3>
+            <p>Motorización y reparación de motores tubulares.</p>
+            <span class="explora-card__cta">Entrar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+
+          <a class="explora-card reveal d2" href="urgencias-persianas-malaga.html">
+            <span class="explora-card__brillo" aria-hidden="true"></span>
+            <span class="explora-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-10 12h7l-1 8 10-12h-7l1-8z"/></svg></span>
+            <h3>Urgencias</h3>
+            <p>Avisos rápidos para persianas bloqueadas.</p>
+            <span class="explora-card__cta">Entrar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+
+          <a class="explora-card reveal d3" href="instalacion-persianas-malaga.html">
+            <span class="explora-card__brillo" aria-hidden="true"></span>
+            <span class="explora-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M4 21V8l8-5 8 5v13"/></svg></span>
+            <h3>Instalación</h3>
+            <p>Persianas nuevas cuando reparar ya no compensa.</p>
+            <span class="explora-card__cta">Entrar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+
+          <a class="explora-card reveal" href="cambio-cinta-persianas-malaga.html">
+            <span class="explora-card__brillo" aria-hidden="true"></span>
+            <span class="explora-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6M12 16v6"/><circle cx="12" cy="12" r="4"/></svg></span>
+            <h3>Cambio de cinta</h3>
+            <p>Cinta y recogedor para un movimiento suave.</p>
+            <span class="explora-card__cta">Entrar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         FACHADA INTERACTIVA — Calle de Málaga
+         ========================================================= -->
+    <section class="section section--gris fachada-seccion">
+      <div class="contenedor">
+        <div class="text-center reveal">
+          <span class="eyebrow">Un vistazo a Málaga</span>
+          <h2 class="seccion-titulo">Cada persiana cuenta una avería distinta</h2>
+          <p class="seccion-intro">Toca o pasa el ratón sobre cada ventana para ver el servicio que necesita.</p>
+        </div>
+
+        <div class="fachada reveal" role="group" aria-label="Fachada interactiva con ejemplos de averías de persianas en Málaga">
+          <div class="fachada-cielo" aria-hidden="true"><span class="fachada-sol"></span></div>
+          <div class="fachada-muro">
+            <a class="ventana ventana--atascada" href="reparacion-persianas-malaga.html">
+              <span class="ventana-marco"><span class="ventana-persiana"></span></span>
+              <span class="ventana-tag"><strong>Persiana atascada</strong><small>Ver reparación</small></span>
+            </a>
+            <a class="ventana ventana--motor" href="motores-persianas-malaga.html">
+              <span class="ventana-marco"><span class="ventana-persiana"></span></span>
+              <span class="ventana-tag"><strong>Motor averiado</strong><small>Ver motores</small></span>
+            </a>
+            <a class="ventana ventana--urgencia" href="urgencias-persianas-malaga.html">
+              <span class="ventana-marco"><span class="ventana-persiana"></span></span>
+              <span class="ventana-tag"><strong>Persiana rota</strong><small>Ver urgencias</small></span>
+            </a>
+            <a class="ventana ventana--nueva" href="instalacion-persianas-malaga.html">
+              <span class="ventana-marco"><span class="ventana-persiana"></span></span>
+              <span class="ventana-tag"><strong>Persiana nueva</strong><small>Ver instalación</small></span>
+            </a>
+          </div>
+          <div class="fachada-portal" aria-hidden="true"></div>
         </div>
       </div>
     </section>
