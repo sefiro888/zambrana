@@ -14,40 +14,48 @@
   "use strict";
 
   /* -------------------------------------------------------------------
-     1. INTRO ANIMADA — Persiana subiendo (solo home)
-     Se muestra una vez por sesión para no resultar molesta.
+     1. INTRO INMERSIVA — Persiana cerrada (gate, solo home)
+     Se queda cerrada hasta que el usuario pulsa "Abrir persiana".
+     Se guarda en localStorage para no repetirla en próximas visitas.
   ------------------------------------------------------------------- */
   function gestionarIntro() {
     var intro = document.getElementById("intro");
     if (!intro) return;
 
-    var yaVista = sessionStorage.getItem("pz_intro_vista");
+    var STORAGE_KEY = "pz_intro_vista";
+    var yaVista;
+    try { yaVista = localStorage.getItem(STORAGE_KEY); } catch (err) { yaVista = null; }
     var reduceMov = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var btn = document.getElementById("intro-btn");
 
     if (yaVista) {
-      // Si ya se vio en esta sesión, quitarla de inmediato.
+      // Ya se abrió la persiana en una visita anterior: no molestar de nuevo.
       intro.remove();
       document.body.classList.remove("intro-activo");
       return;
     }
 
     document.body.classList.add("intro-activo");
-    var duracion = reduceMov ? 450 : 1500;
+    if (btn) btn.focus({ preventScroll: true });
 
-    window.setTimeout(function () {
-      intro.classList.add("intro--oculto");
-      document.body.classList.remove("intro-activo");
-      sessionStorage.setItem("pz_intro_vista", "1");
+    function abrirPersiana() {
+      if (intro.classList.contains("intro--abriendo")) return;
+      intro.classList.add("intro--abriendo");
+      try { localStorage.setItem(STORAGE_KEY, "1"); } catch (err) { /* almacenamiento no disponible */ }
+
+      var duracion = reduceMov ? 300 : 1500;
       window.setTimeout(function () {
-        if (intro && intro.parentNode) intro.remove();
-      }, 700);
-    }, duracion);
+        intro.classList.add("intro--oculto");
+        document.body.classList.remove("intro-activo");
+        window.setTimeout(function () {
+          if (intro && intro.parentNode) intro.remove();
+        }, 650);
+      }, duracion);
+    }
 
-    // Permitir saltar la intro pulsando / tocando.
-    intro.addEventListener("click", function () {
-      intro.classList.add("intro--oculto");
-      document.body.classList.remove("intro-activo");
-      sessionStorage.setItem("pz_intro_vista", "1");
+    if (btn) btn.addEventListener("click", abrirPersiana);
+    intro.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") abrirPersiana();
     });
   }
 
@@ -314,6 +322,99 @@
   }
 
   /* -------------------------------------------------------------------
+     9. TARJETAS "EXPLORA" — Inclinación 3D al pasar el ratón
+     Solo en escritorio con ratón preciso; respeta reduced-motion.
+  ------------------------------------------------------------------- */
+  function gestionarExploraCards() {
+    var cards = document.querySelectorAll(".explora-card");
+    if (!cards.length) return;
+
+    var reduceMov = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var puedeHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (reduceMov || !puedeHover) return;
+
+    cards.forEach(function (card) {
+      var rAF = null;
+      var pendiente = null;
+
+      function aplicar() {
+        rAF = null;
+        if (!pendiente) return;
+        card.style.setProperty("--rx", pendiente.rx + "deg");
+        card.style.setProperty("--ry", pendiente.ry + "deg");
+        card.style.setProperty("--mx", pendiente.mx + "%");
+        card.style.setProperty("--my", pendiente.my + "%");
+      }
+
+      card.addEventListener("pointermove", function (e) {
+        if (e.pointerType !== "mouse") return;
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width;
+        var py = (e.clientY - r.top) / r.height;
+        pendiente = {
+          ry: (px - 0.5) * 14,
+          rx: (0.5 - py) * 14,
+          mx: px * 100,
+          my: py * 100
+        };
+        if (!rAF) rAF = window.requestAnimationFrame(aplicar);
+      });
+
+      card.addEventListener("pointerleave", function () {
+        if (rAF) { window.cancelAnimationFrame(rAF); rAF = null; }
+        pendiente = null;
+        card.style.setProperty("--rx", "0deg");
+        card.style.setProperty("--ry", "0deg");
+      });
+    });
+  }
+
+  /* -------------------------------------------------------------------
+     10. TRANSICIÓN ENTRE PÁGINAS — Efecto "persiana" al navegar
+     Al hacer clic en un enlace interno, baja una persiana antes de
+     cargar la página siguiente; esta, al cargar, la sube (ver CSS
+     y el script de cabecera embebido en cada HTML).
+  ------------------------------------------------------------------- */
+  function gestionarTransicionPaginas() {
+    var html = document.documentElement;
+
+    // Si esta página acaba de entrar tras una transición, retira la clase
+    // cuando termine la animación de "subida" para dejar el estado limpio.
+    if (html.classList.contains("pz-nav-entrando")) {
+      html.addEventListener("animationend", function limpiar(e) {
+        if (e.target !== document.body) return;
+        html.classList.remove("pz-nav-entrando");
+        html.removeEventListener("animationend", limpiar);
+      });
+      // Red de seguridad por si el evento no llega (imagen de fondo, etc.)
+      window.setTimeout(function () { html.classList.remove("pz-nav-entrando"); }, 900);
+    }
+
+    var reduceMov = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMov) return;
+
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest("a");
+      if (!a) return;
+      if (a.target && a.target !== "" && a.target !== "_self") return;
+      if (a.hasAttribute("download")) return;
+      if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+
+      var mismoOrigen;
+      try { mismoOrigen = a.origin === window.location.origin; } catch (err) { mismoOrigen = false; }
+      if (!mismoOrigen) return;
+      if (a.pathname === window.location.pathname && a.hash) return; // ancla en la misma página
+
+      e.preventDefault();
+      html.classList.add("pz-nav-saliendo");
+      try { sessionStorage.setItem("pz_nav", "1"); } catch (err) { /* almacenamiento no disponible */ }
+      window.setTimeout(function () {
+        window.location.href = a.href;
+      }, 380);
+    });
+  }
+
+  /* -------------------------------------------------------------------
      INICIO
   ------------------------------------------------------------------- */
   document.addEventListener("DOMContentLoaded", function () {
@@ -325,5 +426,7 @@
     gestionarAnio();
     gestionarFormulario();
     gestionarDecisionLamas();
+    gestionarExploraCards();
+    gestionarTransicionPaginas();
   });
 })();
