@@ -3531,14 +3531,22 @@ h3 { font-size: 1.2rem; }
 .metricas {
   overflow: hidden;
   border: 1px solid rgba(255, 196, 0, .22);
+  border-radius: 18px;
   background:
     radial-gradient(380px 160px at 14% 0%, rgba(255, 196, 0, .24), transparent 66%),
     linear-gradient(145deg, #131A20, #080C10);
+  gap: 1px;
+}
+
+.metrica {
+  background: transparent;
+  border: none;
+  border-radius: 0;
 }
 
 .metrica .n,
 .metrica span {
-  color: #fff;
+  color: rgba(255, 255, 255, .75);
 }
 
 .metrica .n {
@@ -5211,3 +5219,4 @@ html.pz-nav-entrando body::before {
 @media (prefers-reduced-motion: reduce) {
   .btn-call.btn-grande { animation: none; }
 }
+
