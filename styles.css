@@ -3531,14 +3531,22 @@ h3 { font-size: 1.2rem; }
 .metricas {
   overflow: hidden;
   border: 1px solid rgba(255, 196, 0, .22);
+  border-radius: 18px;
   background:
     radial-gradient(380px 160px at 14% 0%, rgba(255, 196, 0, .24), transparent 66%),
     linear-gradient(145deg, #131A20, #080C10);
+  gap: 1px;
+}
+
+.metrica {
+  background: transparent;
+  border: none;
+  border-radius: 0;
 }
 
 .metrica .n,
 .metrica span {
-  color: #fff;
+  color: rgba(255, 255, 255, .75);
 }
 
 .metrica .n {
@@ -5212,137 +5220,3 @@ html.pz-nav-entrando body::before {
   .btn-call.btn-grande { animation: none; }
 }
 
-/* =====================================================================
-   23. TEMA CÁLIDO EDITORIAL — Cambio total (claro, premium, rotundo)
-   Fondo crema, tipografía grande, tarjetas blancas flotantes, amarillo
-   con carácter. Mantiene intro, contenido, SEO y CTAs. Nada oscuro.
-   ===================================================================== */
-
-/* ---- 23.0 Paleta cálida (se redefinen tokens, gana por orden) ---- */
-:root {
-  --gris-claro: #F2EAD9;        /* bandas alternas: arena cálida */
-  --gris-borde: #ECE3D1;
-  --crema: #FAF6EC;
-  --crema-2: #F5EEDF;
-  --tinta: #211C13;             /* texto principal cálido */
-  --tinta-suave: #6B6253;
-  --radio: 22px;
-  --radio-sm: 14px;
-  --radio-lg: 30px;
-  --sombra-sm: 0 2px 6px rgba(120, 92, 20, .06), 0 8px 22px rgba(120, 92, 20, .07);
-  --sombra: 0 6px 16px rgba(120, 92, 20, .08), 0 22px 50px rgba(120, 92, 20, .12);
-  --sombra-lg: 0 14px 40px rgba(120, 92, 20, .12), 0 40px 90px rgba(120, 92, 20, .18);
-}
-
-html, body { background: var(--crema); }
-body { color: var(--tinta); }
-
-/* ---- 23.1 Tipografía rotunda y editorial ---- */
-h1, .hero h1 {
-  font-weight: 800;
-  letter-spacing: -.025em;
-  font-size: clamp(2.1rem, 5.6vw, 3.6rem);
-  line-height: 1.05;
-}
-.seccion-titulo, .home-process h2, section h2 {
-  font-weight: 800;
-  letter-spacing: -.02em;
-  font-size: clamp(1.8rem, 4.4vw, 2.8rem);
-  line-height: 1.1;
-}
-.hero h1 mark {
-  background: linear-gradient(transparent 58%, var(--amarillo) 58%);
-  padding: 0 .08em;
-}
-
-/* Kicker editorial: línea + texto en mayúsculas */
-.eyebrow, .diagnostico-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: none;
-  border: 0;
-  padding: 0;
-  text-transform: uppercase;
-  letter-spacing: .18em;
-  font-size: .74rem;
-  font-weight: 800;
-  color: var(--amarillo-osc);
-  box-shadow: none;
-}
-.eyebrow::before, .diagnostico-kicker::before {
-  content: "";
-  width: 26px;
-  height: 3px;
-  border-radius: 3px;
-  background: var(--amarillo);
-}
-
-/* ---- 23.2 Fondo con bandas cálidas y textura suave ---- */
-.section { background: var(--crema); }
-.section--gris {
-  background:
-    radial-gradient(700px 360px at 92% -10%, rgba(255, 196, 0, .10), transparent 60%),
-    var(--gris-claro);
-}
-.hero.hero--sin-foto {
-  background:
-    radial-gradient(760px 420px at 88% -12%, rgba(255, 196, 0, .26), transparent 58%),
-    radial-gradient(640px 480px at -8% 118%, rgba(255, 196, 0, .12), transparent 55%),
-    linear-gradient(180deg, var(--crema) 0%, var(--crema-2) 100%);
-  color: var(--tinta);
-}
-.hero.hero--sin-foto::before {
-  background-image: radial-gradient(rgba(33, 28, 19, .05) 1px, transparent 1.4px);
-}
-.hero-sub, .servicio-hero .lead { color: var(--tinta-suave); }
-
-/* ---- 23.3 Tarjetas blancas flotantes con esquinas grandes ---- */
-.servicio-card,
-.service-proof-card,
-.decision-item,
-.explora-card,
-.faq-item,
-.zonas-lista li,
-.hero-diagnostico,
-.confianza-card,
-.home-process .strip-grid > div {
-  border-radius: var(--radio);
-  background: #fff;
-  border: 1px solid var(--gris-borde);
-  box-shadow: var(--sombra-sm);
-  transition: transform .3s cubic-bezier(.16, 1, .3, 1), box-shadow .3s ease;
-}
-.servicio-card:hover,
-.service-proof-card:hover,
-.decision-item:hover,
-.explora-card:hover,
-.home-process .strip-grid > div:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--sombra);
-}
-
-/* ---- 23.4 Botones pill con relieve cálido ---- */
-.btn { border-radius: 50px; font-weight: 700; }
-.btn-call {
-  box-shadow: 0 2px 0 var(--amarillo-osc), 0 8px 20px rgba(245, 182, 0, .35);
-}
-.btn-call:hover { box-shadow: 0 2px 0 var(--amarillo-osc), 0 12px 28px rgba(245, 182, 0, .5); }
-.btn-outline {
-  background: #fff;
-  border: 2px solid var(--tinta);
-  color: var(--tinta);
-}
-.btn-outline:hover { background: var(--tinta); color: #fff; }
-
-/* ---- 23.5 Cabecera y pie cálidos ---- */
-.site-header { background: rgba(250, 246, 236, .92); border-bottom-color: var(--gris-borde); }
-.site-header.is-scrolled { background: rgba(250, 246, 236, .97); box-shadow: var(--sombra-sm); }
-
-/* ---- 23.6 Foto del héroe con marco cálido ---- */
-.hero-media img { border-radius: var(--radio-lg); box-shadow: var(--sombra-lg); }
-
-@media (prefers-reduced-motion: reduce) {
-  .servicio-card, .service-proof-card, .decision-item, .explora-card,
-  .home-process .strip-grid > div { transition: none; }
-}
